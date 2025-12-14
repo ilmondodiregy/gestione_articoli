@@ -1,0 +1,7 @@
+{
+  "name": "Magazzino Pro Cloud",
+  "description": "Gestione avanzata di magazzino con supporto immagini, statistiche di vendita e sincronizzazione Google Drive.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
