@@ -1,6 +1,5 @@
-// package.json
 {
-  "name": "magazzino-pro-cloud",
+  "name": "gestione-articoli", // Modificato per coerenza
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -8,15 +7,14 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "predeploy": "npm run build", 
-    "deploy": "gh-pages -d dist" 
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist -r gestione_articoli" // Modificato
   },
   "dependencies": {
-    // ... omesso per brevità
+    // ...
   },
   "devDependencies": {
-    // ... omesso per brevità
-    "vite": "^6.2.0",
+    // ...
     "gh-pages": "^6.1.1" 
   }
 }
