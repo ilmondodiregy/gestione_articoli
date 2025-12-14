@@ -1,47 +1,28 @@
-export enum MovementType {
-  IN = 'IN', // Carico
-  OUT = 'OUT' // Scarico
-}
+// vite.config.ts
+import path from 'path';
+import { defineConfig, loadEnv } from 'vite';
+import react from '@vitejs/plugin-react';
 
-export interface InventoryItem {
-  id: string;
-  code: string;
-  name: string;
-  description: string;
-  price: number;
-  cost: number;
-  quantity: number;
-  minStock: number;
-  category: string;
-  imageData?: string; // Base64 image
-  updatedAt: number;
-}
-
-export interface StockMovement {
-  id: string;
-  itemId: string;
-  itemName: string;
-  type: MovementType;
-  quantity: number;
-  date: number;
-  reason?: string;
-}
-
-export interface DriveConfig {
-  clientId: string;
-  apiKey: string; // Needed for Picker API or direct REST calls if not using GSI exclusively
-  folderId?: string;
-  lastSync?: number;
-}
-
-export interface AppState {
-  items: InventoryItem[];
-  movements: StockMovement[];
-  config: DriveConfig;
-}
-
-export interface SyncStatus {
-  isSyncing: boolean;
-  lastError?: string;
-  successMessage?: string;
-}
+export default defineConfig(({ mode }) => {
+    const env = loadEnv(mode, '.', '');
+    const isProduction = mode === 'production';
+    
+    return {
+      // Imposta il base path sulla cartella del repository solo per il deploy
+      base: isProduction ? '/magazzino-pro-cloud/' : '/', 
+      server: {
+        port: 3000,
+        host: '0.0.0.0',
+      },
+      plugins: [react()],
+      define: {
+        'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+        'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
+      },
+      resolve: {
+        alias: {
+          '@': path.resolve(__dirname, '.'),
+        }
+      }
+    };
+});
