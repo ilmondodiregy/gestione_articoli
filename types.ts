@@ -8,8 +8,8 @@ export default defineConfig(({ mode }) => {
     const isProduction = mode === 'production';
     
     return {
-      // Imposta il base path sulla cartella del repository solo per il deploy
-      base: isProduction ? '/magazzino-pro-cloud/' : '/', 
+      // CORREZIONE APPLICATA: Base path impostato sul nome del repository: /gestione_articoli/
+      base: isProduction ? '/gestione_articoli/' : '/', 
       server: {
         port: 3000,
         host: '0.0.0.0',
